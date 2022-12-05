@@ -26,12 +26,17 @@ describe("A11yClicker", () => {
             </A11yClicker>
         );
 
+        // Element was built
         expect(container.outerHTML).not.toBeNull();
 
+        // Mock function hasn't been called
         expect(clickCatcher.mock.calls.length).toBe(0);
 
+        // Click on element
         const myObj = container.querySelector("#myObj") as HTMLElement;
         fireEvent.click(myObj);
+
+        // Confirm function was called when element was clicked
         expect(clickCatcher.mock.calls.length).toBe(1);
 
         fireEvent.keyDown(myObj, {
@@ -42,6 +47,12 @@ describe("A11yClicker", () => {
 
         fireEvent.keyDown(myObj, {
             key: " ",
+            preventDefault: () => {}
+        });
+        expect(clickCatcher.mock.calls.length).toBe(3);
+
+        fireEvent.keyDown(myObj, {
+            key: "a",
             preventDefault: () => {}
         });
         expect(clickCatcher.mock.calls.length).toBe(3);
