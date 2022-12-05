@@ -1,5 +1,3 @@
-const setup = () => {
-    
-};
+const setup = () => {};
 
 export default setup;
